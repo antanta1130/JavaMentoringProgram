@@ -1,0 +1,28 @@
+elastic search 2.4.6
+
+PUT http://localhost:9200/mails
+
+POST http://localhost:9200/mails/messages/_mapping
+{
+        "messages" : {
+			"properties": { 
+			"id":    	{ "type": "integer" , "index" : "not_analyzed"  },
+			"title":    { "type": "string", "index" : "analyzed"  }, 
+			"body":     { "type": "string", "index" : "analyzed"  } ,
+			"received_date":  {"type": "date", "format": "yyyy-MM-dd HH:mm:ss", "index" : "not_analyzed"},
+			"from":     { "type": "string", "index" : "analyzed"  }
+			}
+		}
+}
+
+
+POST http://localhost:9200/mails/bookmark/_mapping
+{
+		"bookmark" :{
+		"properties": { "start_datetime":  {"type": "date", "format": "yyyy-MM-dd HH:mm:ss", "index" : "not_analyzed"}}}
+}
+
+POST http://localhost:9200/mails/bookmark/0
+{
+"start_datetime" : "2016-01-01 00:00:00"
+}

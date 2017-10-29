@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="/css/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.css"/>
+
+<script src="/lib/jquery.min.js"></script>
+<script src="/lib/jquery-ui.min.js"></script>
+<script src="/lib/jquery.datetimepicker.js"></script>
+<script src="/lib/jquery.datetimepicker.full.min.js"></script>
+<script src="/js/mailFiltration.js"></script>
+
+<title>Mail Receiver</title>
+</head>
+<body>
+   <div id="container">
+      <div id="form">
+         <div class="panel" id="panel">
+            <form class="form" id="searchForm" action="" style="">
+               <h1>Get mails for period</h1>
+               <div>
+                  	<label for="fromDate">From:</label>
+                  	<div>
+    				<input class="date" id="fromDate" size="16" type="text">
+                	</div>
+                </div>
+               </div>
+               <div>
+                 	<label for="toDate">Till:</label> 
+                 	<div>
+    				<input class="date" id="toDate" size="16" type="text">
+    				</div>
+                </div>
+               <div>
+                  <label for="search">Search</label> 
+                  <div>
+                  <input type="text" name="search" id="searchInput" placeholder="Search..." />
+                  </div>
+               </div>
+               <button type="submit" id="filtrationButton">Submit</button>
+            </form>
+         </div>
+      </div>
+   </div>
+   <div id="footer"></div>
+</body>
+
+
+ 

@@ -1,0 +1,16 @@
+# Maven
+target/
+
+#Eclipse
+.project
+.settings/
+.classpath
+test-output/
+test-output/junitreports
+
+#Idea
+out/
+.idea/
+
+#TestNG
+test-output/
