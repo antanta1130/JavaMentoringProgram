@@ -6,7 +6,11 @@ $(function() {
 				
 		$.ajax({
 			url : "/messages/filter?fromDate=" + $('#fromDate').val() + "&toDate=" + $('#toDate').val() + "&searchInput=" + $('#searchInput').val(),
-			method : "GET"
+			method : "GET",
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader("Content-Type", "application/json");
+			},
+			dataType: "json"
 		}).done(function(data) {
 			console.log(data);
 		}).fail(function(jqXHR, textStatus, errorThrown) {

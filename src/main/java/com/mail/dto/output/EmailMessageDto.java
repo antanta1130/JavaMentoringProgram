@@ -1,34 +1,24 @@
 package com.mail.dto.output;
 
+import lombok.Getter;
+
 public class EmailMessageDto {
+    @Getter
     final private String title;
 
-    final private String text;
+    @Getter
+    final private String body;
 
+    @Getter
     final private String receivedDate;
 
+    @Getter
     final private String from;
 
-    public EmailMessageDto(String title, String text, String receivedDate, String from) {
+    public EmailMessageDto(String title, String body, String receivedDate, String from) {
         this.title = title;
-        this.text = text;
+        this.body = body;
         this.receivedDate = receivedDate;
         this.from = from;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public String getReceivedDate() {
-        return receivedDate;
-    }
-
-    public String getFrom() {
-        return from;
     }
 }

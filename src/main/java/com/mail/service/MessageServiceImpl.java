@@ -3,6 +3,7 @@ package com.mail.service;
 import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
@@ -10,6 +11,7 @@ import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHits;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
@@ -47,9 +49,24 @@ public class MessageServiceImpl implements MessageService {
                 .execute()
                 .actionGet();
 
-        // SearchHit[] searchHits = response.getHits().getHits();
+        SearchHits searchHits = response.getHits();
+        List<EmailMessageDto> emailMessageDtoList = new ArrayList<>();
+
+        // for (SearchHit hit : searchHits.getHits()) {
+        // LOGGER.info("{}", hit.field("title").<String>getValue());
+        // LOGGER.info("{}", hit.field("body").<String>getValue());
+        // LOGGER.info("{}",
+        // String.valueOf(hit.field("received_date").value()));
+        // LOGGER.info("{}", hit.field("from").<String>getValue());
+        // emailMessageDtoList.add(new EmailMessageDto(
+        // hit.field("title").<String>getValue(),
+        // hit.field("body").<String>getValue(),
+        // String.valueOf(hit.field("received_date").value()),
+        // hit.field("from").<String>getValue()));
+        // }
+
         LOGGER.info("{}", response);
-        return null;
+        return emailMessageDtoList;
     }
 
     @Override
