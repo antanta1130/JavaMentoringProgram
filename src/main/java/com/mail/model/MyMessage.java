@@ -58,7 +58,7 @@ public class MyMessage {
 
     @Override
     public String toString() {
-        return "Message [title=" + title + ", subject=" + text + ", receivedDate=" + receivedDate + ", from=" + from + "]";
+        return "Message [title=" + title + ", receivedDate=" + receivedDate + ", from=" + from + "]";
     }
 
 }

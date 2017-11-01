@@ -9,7 +9,7 @@ POST http://localhost:9200/mails/messages/_mapping
 			"id":    	{ "type": "integer" , "index" : "not_analyzed"  },
 			"title":    { "type": "string", "index" : "analyzed"  }, 
 			"body":     { "type": "string", "index" : "analyzed"  } ,
-			"received_date":  {"type": "date", "format": "yyyy-MM-dd HH:mm:ss", "index" : "not_analyzed"},
+			"received_date":  {"type": "date", "format": "epoch_millis", "index" : "not_analyzed"},
 			"from":     { "type": "string", "index" : "analyzed"  }
 			}
 		}

@@ -31,7 +31,7 @@ import com.mail.sync.ScheduledTaskRunner;
 @EnableScheduling
 public class Config {
 
-    @Value("${elasticsearch.home:C:/Users/Tetiana/Documents/elasticsearch-5.6.3}")
+    @Value("${elasticsearch.home:C:/Users/Tetiana/Documents/elasticsearch-2.4.6}")
     private String elasticsearchHome;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MailController.class);
@@ -69,8 +69,8 @@ public class Config {
     }
 
     @Bean
-    public MailController mailController(MessageService messageService) {
-        return new MailController(messageService);
+    public MailController mailController(MessageService messageService, DateTimeFormatter dateTimeFormatter) {
+        return new MailController(messageService, dateTimeFormatter);
     }
 
     @Bean

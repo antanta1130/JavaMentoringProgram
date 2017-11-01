@@ -1,18 +1,12 @@
 package com.mail.dto.output;
 
-import lombok.Getter;
-
 public class EmailMessageDto {
-    @Getter
     final private String title;
 
-    @Getter
     final private String body;
 
-    @Getter
     final private String receivedDate;
 
-    @Getter
     final private String from;
 
     public EmailMessageDto(String title, String body, String receivedDate, String from) {
@@ -21,4 +15,21 @@ public class EmailMessageDto {
         this.receivedDate = receivedDate;
         this.from = from;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public String getReceivedDate() {
+        return receivedDate;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
 }

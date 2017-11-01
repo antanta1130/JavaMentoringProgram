@@ -35,7 +35,7 @@ public class BookmarkServiceImpl implements BookmarkService {
     public DateTime getStartDate() {
         GetResponse response = client.prepareGet(INDEX, TYPE, ID).get();
         DateTime dt = dateTimeFormatter.parseDateTime(response.getSource().get(START_DATETIME).toString());
-        LOGGER.info("get bookmark: {}", dt);
+        LOGGER.info("get bookmark: {}", dt.toString(dateTimeFormatter));
         return dt;
     }
 
@@ -51,12 +51,12 @@ public class BookmarkServiceImpl implements BookmarkService {
                     .field(START_DATETIME, bookmark.toString(dateTimeFormatter))
                     .endObject());
         } catch (Exception e) {
-            LOGGER.error("fails to set new bookmark: {}", bookmark.toString(dateTimeFormatter));
+            LOGGER.error("Failed to set new bookmark: {}", bookmark.toString(dateTimeFormatter));
             LOGGER.error(e.getMessage());
         }
         client.update(updateRequest).get();
 
-        LOGGER.info("set new bookmark: {}", bookmark.toString(dateTimeFormatter));
+        LOGGER.info("set bookmark: {}", bookmark.toString(dateTimeFormatter));
     }
 
     @Autowired

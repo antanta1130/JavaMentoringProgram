@@ -35,7 +35,7 @@ public class DBSyncServiceImpl implements DBSyncService {
         DateTime endBookmark = DateTime.now();
         List<MyMessage> mails = mailService.getMessagesForPeriod(startBookmark, endBookmark);
 
-        LOGGER.info("Start mail messages prosessing for period from {} to {}", startBookmark.toString(dateTimeFormatter), endBookmark.toString(dateTimeFormatter));
+        LOGGER.info("Started mail messages prosessing for period from {} to {}", startBookmark.toString(dateTimeFormatter), endBookmark.toString(dateTimeFormatter));
 
         try {
             messageService.bulkInsert(mails);
