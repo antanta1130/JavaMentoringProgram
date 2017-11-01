@@ -16,19 +16,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mail.dto.output.EmailMessageDto;
-import com.mail.service.MessageService;
+import com.mail.service.DoEverythingService;
 
 @RestController
 public class MailController {
 
-    private final MessageService mailService;
+    private final DoEverythingService doEverythingService;
     private final DateTimeFormatter dateTimeFormatter;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MailController.class);
 
     @Autowired
-    public MailController(MessageService mailService, DateTimeFormatter dateTimeFormatter) {
-        this.mailService = mailService;
+    public MailController(DoEverythingService doEverythingService, DateTimeFormatter dateTimeFormatter) {
+        this.doEverythingService = doEverythingService;
         this.dateTimeFormatter = dateTimeFormatter;
     }
 
@@ -37,7 +37,7 @@ public class MailController {
             @RequestParam("toDate") String toDate, @RequestParam("searchInput") String searchInput) {
         LOGGER.info("from {} till {}, string to search: {}", fromDate, toDate, searchInput);
 
-        List<EmailMessageDto> emailList = mailService.mailFiltrationByPeriodAndText(dateTimeFormatter.parseDateTime(fromDate),
+        List<EmailMessageDto> emailList = doEverythingService.mailFiltrationByPeriodAndText(dateTimeFormatter.parseDateTime(fromDate),
                 dateTimeFormatter.parseDateTime(toDate), searchInput);
         LOGGER.info("response list size: {}", emailList.size());
         return new ResponseEntity<>(emailList, HttpStatus.OK);

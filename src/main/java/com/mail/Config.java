@@ -17,14 +17,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.mail.controller.MailController;
-import com.mail.service.BookmarkService;
-import com.mail.service.BookmarkServiceImpl;
-import com.mail.service.DBSyncService;
-import com.mail.service.DBSyncServiceImpl;
-import com.mail.service.MailService;
-import com.mail.service.MailServiceImpl;
-import com.mail.service.MessageService;
-import com.mail.service.MessageServiceImpl;
+import com.mail.service.DoEverythingService;
 import com.mail.sync.ScheduledTaskRunner;
 
 @Configuration
@@ -49,34 +42,18 @@ public class Config {
     }
 
     @Bean
-    public DBSyncService dBSyncService(BookmarkService bookmarkService, MessageService messageService, MailService mailService, DateTimeFormatter dateTimeFormatter) {
-        return new DBSyncServiceImpl(bookmarkService, messageService, mailService, dateTimeFormatter);
+    public DoEverythingService doEverythingService(Client client, DateTimeFormatter dateTimeFormatter) {
+        return new DoEverythingService(client, dateTimeFormatter);
     }
 
     @Bean
-    public MailService mailService() {
-        return new MailServiceImpl();
+    public MailController mailController(DoEverythingService doEverythingService, DateTimeFormatter dateTimeFormatter) {
+        return new MailController(doEverythingService, dateTimeFormatter);
     }
 
     @Bean
-    public BookmarkService bookmarkService(Client client, DateTimeFormatter dateTimeFormatter) {
-        return new BookmarkServiceImpl(client, dateTimeFormatter);
-    }
-
-    @Bean
-    public MessageService messageService(Client client, DateTimeFormatter dateTimeFormatter) throws UnknownHostException {
-        return new MessageServiceImpl(client, dateTimeFormatter);
-    }
-
-    @Bean
-    public MailController mailController(MessageService messageService, DateTimeFormatter dateTimeFormatter) {
-        return new MailController(messageService, dateTimeFormatter);
-    }
-
-    @Bean
-    public ScheduledTaskRunner scheduledTaskRunner(BookmarkService bookmarkService, MessageService messageService, MailService mailService, DateTimeFormatter dateTimeFormatter) {
-        return new ScheduledTaskRunner(dBSyncService(bookmarkService,
-                messageService, mailService, dateTimeFormatter));
+    public ScheduledTaskRunner scheduledTaskRunner(DoEverythingService doEverythingService) {
+        return new ScheduledTaskRunner(doEverythingService);
     }
 
     @Bean
