@@ -18,15 +18,16 @@ public class DBSyncServiceImpl implements DBSyncService {
     private final BookmarkService bookmarkService;
     private final MessageService messageService;
     private final MailService mailService;
-    private DateTimeFormatter dateTimeFormatter;
+    private final DateTimeFormatter dateTimeFormatter;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DBSyncServiceImpl.class);
 
     @Autowired
-    public DBSyncServiceImpl(BookmarkService bookmarkService, MessageService messageService, MailService mailService) {
+    public DBSyncServiceImpl(BookmarkService bookmarkService, MessageService messageService, MailService mailService, DateTimeFormatter dateTimeFormatter) {
         this.bookmarkService = bookmarkService;
         this.messageService = messageService;
         this.mailService = mailService;
+        this.dateTimeFormatter = dateTimeFormatter;
     }
 
     @Override
@@ -43,11 +44,6 @@ public class DBSyncServiceImpl implements DBSyncService {
         } catch (IOException | InterruptedException | ExecutionException e) {
             LOGGER.error(e.getMessage());
         }
-    }
-
-    @Autowired
-    public void setDateTimeFormatter(DateTimeFormatter dateTimeFormatter) {
-        this.dateTimeFormatter = dateTimeFormatter;
     }
 
 }

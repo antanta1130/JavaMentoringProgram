@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookmarkServiceImpl implements BookmarkService {
     private final Client client;
-    private DateTimeFormatter dateTimeFormatter;
+    private final DateTimeFormatter dateTimeFormatter;
 
     private static final String INDEX = "mails";
     private static final String TYPE = "bookmark";
@@ -27,8 +27,9 @@ public class BookmarkServiceImpl implements BookmarkService {
     private static final Logger LOGGER = LoggerFactory.getLogger(BookmarkServiceImpl.class);
 
     @Autowired
-    public BookmarkServiceImpl(Client client) {
+    public BookmarkServiceImpl(Client client, DateTimeFormatter dateTimeFormatter) {
         this.client = client;
+        this.dateTimeFormatter = dateTimeFormatter;
     }
 
     @Override
@@ -57,11 +58,6 @@ public class BookmarkServiceImpl implements BookmarkService {
         client.update(updateRequest).get();
 
         LOGGER.info("set bookmark: {}", bookmark.toString(dateTimeFormatter));
-    }
-
-    @Autowired
-    public void setDateTimeFormatter(DateTimeFormatter dateTimeFormatter) {
-        this.dateTimeFormatter = dateTimeFormatter;
     }
 
 }

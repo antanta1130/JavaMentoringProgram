@@ -26,14 +26,15 @@ import com.mail.model.MyMessage;
 public class MessageServiceImpl implements MessageService {
     private final Client client;
     private final BulkRequestBuilder bulkRequest;
-    private DateTimeFormatter dateTimeFormatter;
+    private final DateTimeFormatter dateTimeFormatter;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageServiceImpl.class);
 
     @Autowired
-    public MessageServiceImpl(Client client) {
+    public MessageServiceImpl(Client client, DateTimeFormatter dateTimeFormatter) {
         this.client = client;
         bulkRequest = client.prepareBulk();
+        this.dateTimeFormatter = dateTimeFormatter;
     }
 
     @Override
@@ -100,10 +101,5 @@ public class MessageServiceImpl implements MessageService {
             return 1;
         }
         return 0;
-    }
-
-    @Autowired
-    public void setDateTimeFormatter(DateTimeFormatter dateTimeFormatter) {
-        this.dateTimeFormatter = dateTimeFormatter;
     }
 }

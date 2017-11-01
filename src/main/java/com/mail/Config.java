@@ -49,8 +49,8 @@ public class Config {
     }
 
     @Bean
-    public DBSyncService dBSyncService(BookmarkService bookmarkService, MessageService messageService, MailService mailService) {
-        return new DBSyncServiceImpl(bookmarkService, messageService, mailService);
+    public DBSyncService dBSyncService(BookmarkService bookmarkService, MessageService messageService, MailService mailService, DateTimeFormatter dateTimeFormatter) {
+        return new DBSyncServiceImpl(bookmarkService, messageService, mailService, dateTimeFormatter);
     }
 
     @Bean
@@ -59,13 +59,13 @@ public class Config {
     }
 
     @Bean
-    public BookmarkService bookmarkService(Client client) {
-        return new BookmarkServiceImpl(client);
+    public BookmarkService bookmarkService(Client client, DateTimeFormatter dateTimeFormatter) {
+        return new BookmarkServiceImpl(client, dateTimeFormatter);
     }
 
     @Bean
-    public MessageService messageService(Client client) throws UnknownHostException {
-        return new MessageServiceImpl(client);
+    public MessageService messageService(Client client, DateTimeFormatter dateTimeFormatter) throws UnknownHostException {
+        return new MessageServiceImpl(client, dateTimeFormatter);
     }
 
     @Bean
@@ -74,9 +74,9 @@ public class Config {
     }
 
     @Bean
-    public ScheduledTaskRunner scheduledTaskRunner(BookmarkService bookmarkService, MessageService messageService, MailService mailService) {
+    public ScheduledTaskRunner scheduledTaskRunner(BookmarkService bookmarkService, MessageService messageService, MailService mailService, DateTimeFormatter dateTimeFormatter) {
         return new ScheduledTaskRunner(dBSyncService(bookmarkService,
-                messageService, mailService));
+                messageService, mailService, dateTimeFormatter));
     }
 
     @Bean
