@@ -149,17 +149,13 @@ public class DoEverythingService {
         LOGGER.info("Search hits were found in {} messages", searchHits.length);
 
         for (SearchHit hit : searchHits) {
-            DateTime dt = new DateTime((long) hit.field("received_date").getValue());
-            emailMessageDtoList.add(new EmailMessageDto(
-                    hit.field("title").<String>getValue(),
-                    hit.field("body").<String>getValue(),
-                    dt.toString(dateTimeFormatter),
-                    hit.field("from").<String>getValue()));
+			String date = new DateTime((long) hit.field("received_date").getValue()).toString(dateTimeFormatter);
+            String title = hit.field("title").<String>getValue();
+            String body = hit.field("body").<String>getValue();
+            String from = hit.field("from").<String>getValue();
+            emailMessageDtoList.add(new EmailMessageDto(title, body, date, from));
 
-            LOGGER.debug("{}", hit.field("title").<String>getValue());
-            LOGGER.debug("{}", hit.field("body").<String>getValue());
-            LOGGER.debug("{}", dt.toString(dateTimeFormatter));
-            LOGGER.debug("{}", hit.field("from").<String>getValue());
+            LOGGER.debug("title: {}, body: {}, date: {}, from: {} ", title, body, date, from);
         }
 
         LOGGER.debug("{}", response);
